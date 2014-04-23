@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/statusText"
+        android:layout_below="@+id/refreshTimeline"
+        android:layout_alignParentStart="true"
+        android:inputType="text"
+        android:imeOptions="actionSend"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:text="Tweet"
+                android:id="@+id/updateStatus"
+                android:layout_below="@+id/statusText"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="right" />
+
+        <Button
+                android:id="@+id/refreshTimeline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Refresh Timeline"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true" />
+    </LinearLayout>
+
+ <it.gmariotti.cardslib.library.view.CardListView
+        card:list_card_layout_resourceID="@layout/list_card_thumbnail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/carddemo_list"/>
+
+    <!--
+        </LinearLayout>
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Status"
+                android:id="@+id/updateStatus"
+                android:layout_below="@+id/statusText"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="393dp">
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/twitFeed"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/updateStatus"
+                android:dividerHeight="2dp"
+                android:divider="#b5b5b5"
+                android:clickable="false" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/refreshTimeline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Refresh Timeline"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/profilePic" />
+    -->
+</LinearLayout>

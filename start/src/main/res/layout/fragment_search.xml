@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="242dp"
+            android:layout_height="match_parent"
+            android:id="@+id/searchText"
+            android:inputType="text"
+            android:imeOptions="actionSend"
+            />
+            android:id="@+id/editText"
+            android:text="Enter Search Here" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go"
+            android:id="@+id/searchButton"
+            android:layout_gravity="right" />
+
+
+
+    </LinearLayout>
+    <it.gmariotti.cardslib.library.view.CardListView
+        card:list_card_layout_resourceID="@layout/list_card_thumbnail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/card_search"/>
+
+    </LinearLayout>
+
+
