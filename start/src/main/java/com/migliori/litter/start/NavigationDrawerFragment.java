@@ -204,16 +204,15 @@ public class NavigationDrawerFragment extends Fragment {
         switch (mCurrentSelectedPosition)
         {
             case 0:
-
                 //fragment = new TimeLineFragment();
 
                     fragment = new PlaceholderFragment();
-                Toast.makeText(getActivity(), "Current Position 0.", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getActivity(), "Current Position 0.", Toast.LENGTH_SHORT).show();
                 break;
 
             case 1:
                 fragment = new SearchFragment();
-                Toast.makeText(getActivity(), "Current Position 1.", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), "Current Position 1.", Toast.LENGTH_SHORT).show();
                 break;
 
             case 2:

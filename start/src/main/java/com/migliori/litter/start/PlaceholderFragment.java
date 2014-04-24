@@ -3,6 +3,7 @@ package com.migliori.litter.start;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -26,16 +27,17 @@ import twitter4j.auth.RequestToken;
 /**
  * Created by macbook on 4/22/14.
  */ public  class PlaceholderFragment extends Fragment {
+    private static SharedPreferences mSharedPreferences;
     private static Twitter twitter;
     Button twitFeed;
     Button updateStatus;
     EditText status;
     Thread thread;
     public static boolean loginState = false;
-    private static SharedPreferences mSharedPreferences;
     public  EditText statusText;
     Bitmap image;
     Button login;
+
 
     FragmentTransaction ft;
     /**
@@ -66,17 +68,47 @@ import twitter4j.auth.RequestToken;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        if(Consts.login == false)
+        mSharedPreferences = getActivity().getSharedPreferences(Consts.PREFERENCE_NAME, Context.MODE_PRIVATE);
+
+
+
+        if(Consts.login == false) {
             loginToTwitter();
 
-        login = (Button) getActivity().findViewById(R.id.loginButton);
+           // AccessToken accessToken = twitter.getOAuthAccessToken(requestToken, verifier);
+
+           // SharedPreferences.Editor e = mSharedPreferences.edit();
+
+            //e.putString(Consts.PREF_KEY_TOKEN, accessToken.getToken());
+            //e.putString(Consts.PREF_KEY_SECRET, accessToken.getTokenSecret());
+            //e.commit();
+            /*
+            Fragment fragment = new TimeLineFragment();
+
+
+            if (fragment != null) {
+                FragmentManager fragmentManager = getFragmentManager();
+                //  if(imm.)
+                //         imm.hideSoftInputFromWindow(fragment.getView().getWindowToken(), 0);
+
+
+                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+            }
+            */
+
+        }
+        //login = (Button) getActivity().findViewById(R.id.loginButton);
+
 
 
         // TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 //            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
         return rootView;
     }
+
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -93,11 +125,13 @@ import twitter4j.auth.RequestToken;
             public void onClick(View view) {
                 if (Consts.login == false)
                     loginToTwitter();
+
                 else {
                     Toast.makeText(getActivity(), "D'oh", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
     }
 
 
@@ -114,6 +148,7 @@ import twitter4j.auth.RequestToken;
         GetRequestTokenTask getRequestTokenTask = new GetRequestTokenTask();
         getRequestTokenTask.execute();
         loginState = true;
+
     }
 
     private class GetRequestTokenTask extends AsyncTask<Void, Void, Void> {
@@ -156,6 +191,7 @@ import twitter4j.auth.RequestToken;
         String verifier = uri.getQueryParameter("oauth_verifier");
         GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask();
         getAccessTokenTask.execute(verifier);
+
     }
 
 
@@ -173,6 +209,14 @@ import twitter4j.auth.RequestToken;
             }
             return null;
         }
+    }
+
+    private void disconnectTwitter() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.remove(Consts.PREF_KEY_TOKEN);
+        editor.remove(Consts.PREF_KEY_SECRET);
+
+        editor.commit();
     }
 }
 

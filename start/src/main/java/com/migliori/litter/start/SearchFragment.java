@@ -73,6 +73,8 @@ public class SearchFragment extends Fragment{
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
                     handled = true;
                     initSearch();
+                     imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
+
                 }
                 return handled;
             }
@@ -145,7 +147,7 @@ public class SearchFragment extends Fragment{
             setOnClickListener(new OnCardClickListener() {
                 @Override
                 public void onClick(Card card, View view) {
-                    Toast.makeText(getContext(), "Click Listener card=" + mTitleHeader, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Click Listener card=" + mTitleHeader, Toast.LENGTH_SHORT).show();
                 }
             });
 

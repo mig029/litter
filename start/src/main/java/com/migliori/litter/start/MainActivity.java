@@ -2,6 +2,8 @@ package com.migliori.litter.start;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -110,6 +112,21 @@ public class MainActivity extends Activity
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if(id == R.id.searchAction)
+        {
+            Fragment fragment = new SearchFragment();
+
+            if (fragment != null) {
+                FragmentManager fragmentManager = getFragmentManager();
+                //  if(imm.)
+                //         imm.hideSoftInputFromWindow(fragment.getView().getWindowToken(), 0);
+
+                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+            }
+            return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
