@@ -47,6 +47,10 @@ public class TimeLineFragment extends Fragment{
     String updateStatus;
     public EditText statusText;
     Paging paging = new Paging(1, 20);
+    private View mContentView;
+    private View mLoadingView;
+    private int mShortAnimationDuration;
+
 
 
     ArrayList<String> setTimeLine;
@@ -56,7 +60,10 @@ public class TimeLineFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
        View view = inflater.inflate(R.layout.fragment_timeline, container, false);
-        return view;
+
+
+
+    return view;
 
     }
 
@@ -67,65 +74,7 @@ public class TimeLineFragment extends Fragment{
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         initCards();
-/*
-        timeLineButton = (Button) getActivity().findViewById(R.id.refreshTimeline);
-        statusText = (EditText) getActivity().findViewById(R.id.statusText);
-                timeLineButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "Timeline Refreshed", Toast.LENGTH_SHORT).show();
-                initCards();
-            }
-        });
 
-        tweet = (Button) getActivity().findViewById(R.id.updateStatus);
-        tweet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imm.hideSoftInputFromWindow(statusText.getWindowToken(), 0);
-
-                Toast.makeText(getActivity().getApplicationContext(), "Status Updated", Toast.LENGTH_SHORT).show();
-
-                updateStatus = statusText.getText().toString();
-                Twitter twitter = TwitterFactory.getSingleton();
-                try {
-                    twitter.updateStatus(updateStatus);
-                } catch (TwitterException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-
-        statusText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_SEND) {
-
-                    handled = true;
-                    imm.hideSoftInputFromWindow(statusText.getWindowToken(), 0);
-                    Toast.makeText(getActivity().getApplicationContext(), "Status Updated", Toast.LENGTH_SHORT).show();
-
-                    updateStatus = statusText.getText().toString();
-                    Twitter twitter = TwitterFactory.getSingleton();
-                    try {
-                        twitter.updateStatus(updateStatus);
-                    } catch (TwitterException e) {
-                        e.printStackTrace();
-                    }
-                    statusText.setText("");
-
-
-                }
-                return handled;
-            }
-        });
-
-
-
-*/
     }
 
 
@@ -141,10 +90,6 @@ public class TimeLineFragment extends Fragment{
         } catch (TwitterException e) { e.printStackTrace(); }
 
         for (final Status status : statuses) {
-            //(status.getUser().getName() + ":" +    status.getText());
-            //header.setTitle(status.getUser().getName());
-            //url = status.getUser().getBiggerProfileImageURL();
-            //profilePic.setImageBitmap(downloadBitmap(status.getUser().getBiggerProfileImageURL()));
 
             CardExample card = new CardExample(getActivity(),status.getUser().getName(),status.getText());
             CardHeader header = new CardHeader(getActivity());
@@ -155,27 +100,15 @@ public class TimeLineFragment extends Fragment{
                 public void onMenuItemClick(BaseCard card, MenuItem item) {
 
                     final Status stat = status;
+
                     final Twitter twit = twitter;
-                    atReply(stat, twit);
-                    //status.getId();
-                    /*
-                    System.out.println("onStatus @" + status.getUser().getScreenName() + " - " + status.getText());
-             System.out.println(status.getInReplyToUserId());
-             Twitter tf = new TwitterFactory().getInstance();
-             StatusUpdate st = new StatusUpdate("hello");
-             st.inReplyToStatusId(status.getId());
-             //st.
-             try {
-             tf.updateStatus(st);
-          } catch (TwitterException e) {
-             // TODO Auto-generated catch block
-             e.printStackTrace();
-           }
+                    if(item.getTitle() == "@Reply")
+                    {
+                        atReply(stat, twit);
+                    }
+                     //Toast.makeText(getActivity(), "Click on "+item.getTitle(), Toast.LENGTH_SHORT).show();
 
-
-                     */
-                    Toast.makeText(getActivity(), "Click on "+item.getTitle(), Toast.LENGTH_SHORT).show();
-                }
+                    }
             });
 
             //Add a PopupMenuPrepareListener to add dynamically a menu entry
@@ -184,6 +117,7 @@ public class TimeLineFragment extends Fragment{
                 @Override
                 public boolean onPreparePopupMenu(BaseCard card, PopupMenu popupMenu) {
                     popupMenu.getMenu().add("@Reply");
+                    popupMenu.getMenu().add("Follow");
                     return true;
 
                 /*
@@ -285,9 +219,4 @@ public class TimeLineFragment extends Fragment{
         });
         alert.show();
     }
-
-
-
-
-
 }

@@ -110,24 +110,30 @@ public class MainActivity extends Activity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        Fragment fragment = null;
         if (id == R.id.action_settings) {
-            return true;
+             fragment = new SettingsFragment();
         }
 
         if(id == R.id.searchAction)
         {
-            Fragment fragment = new SearchFragment();
-
-            if (fragment != null) {
-                FragmentManager fragmentManager = getFragmentManager();
-                //  if(imm.)
-                //         imm.hideSoftInputFromWindow(fragment.getView().getWindowToken(), 0);
-
-                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-            }
-            return true;
+            fragment = new SearchFragment();
 
         }
+
+        if(id == R.id.tweetAction) {
+            fragment = new NewTweetFragment();
+        }
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            //  if(imm.)
+            //         imm.hideSoftInputFromWindow(fragment.getView().getWindowToken(), 0);
+
+            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

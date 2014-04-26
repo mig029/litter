@@ -108,7 +108,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
-                        getString(R.string.title_section4),
+                        getString(R.string.tweet),
 
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
@@ -237,6 +237,10 @@ public class NavigationDrawerFragment extends Fragment {
             FragmentManager fragmentManager = getFragmentManager();
           //  if(imm.)
        //         imm.hideSoftInputFromWindow(fragment.getView().getWindowToken(), 0);
+            fragmentManager.beginTransaction().setCustomAnimations(R.anim.spinner, R.anim.spinner);
+
+
+// Start the animated transition.
 
             fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
         }
